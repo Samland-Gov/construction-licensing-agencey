@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Welcome to the Samland Construction Licensing Agency</h1>
+    <p class="govuk-body">
+      The Construction Licensing Agency is responsible for issuing and managing construction permits and licenses across Samland. We help ensure that all building projects meet safety and regulatory standards.
+    </p>
+    <h2 class="govuk-heading-m">What would you like to do?</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a class="govuk-link" href="/apply">Apply for a construction license</a></li>
+      <li><a class="govuk-link" href="/renew">Renew an existing license</a></li>
+      <li><a class="govuk-link" href="/status">Check the status of your application</a></li>
+      <li><a class="govuk-link" href="/guidance">Read construction regulations and guidance</a></li>
+      <li><a class="govuk-link" href="/contact">Contact the agency</a></li>
+    </ul>
+    <h2 class="govuk-heading-m">Latest updates</h2>
+    <p class="govuk-body">
+      For the latest news and updates on construction licensing in Samland, visit our <a class="govuk-link" href="/news">news page</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}

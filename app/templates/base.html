@@ -1,0 +1,86 @@
+{% set govukRebrand = true %}
+
+{% extends 'govuk_frontend_jinja/template.html' %}
+
+{%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner-%}
+{%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary-%}
+{%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
+{%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
+
+{%- from 'components/header/macro.html' import samlandHeader-%}
+{%- from 'components/footer/macro.html' import samlandFooter-%}
+
+{% set assetPath = url_for('static', filename='').rstrip('/') %}
+
+{% block pageTitle %}{{config['SERVICE_NAME']}} - Samland Government{% endblock %}
+
+{% block head %}
+  <meta name="description" content="{{config['SERVICE_NAME']}}">
+  <meta name="author" content="{{config['SERVICE_NAME']}}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.10.1.min.css') }}" />
+  {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+{% endblock %}
+
+{% block header %}
+  {{ samlandHeader({
+    'classes': 'govuk-header--full-width-border',
+    'homepageUrl': 'https://samland.minersonline.uk/',
+    'useTudorCrown': false,
+  }) }}
+
+  {{ govukServiceNavigation({
+    'serviceName': config['SERVICE_NAME'],
+    'serviceUrl': url_for('main.index'),
+    'navigation': [
+      {'href': "#", 'text': 'Components'},
+      {'href': "#", 'text': 'Forms'}
+    ]
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    'tag': {
+      'text': config['SERVICE_PHASE']
+    },
+    'html': 'This is a new service – your <a class="govuk-link" href="' + config['FEEDBACK_URL'] + '">feedback</a> will help us to improve it.'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% if form and form.errors %}
+    {{ govukErrorSummary(wtforms_errors(form)) }}
+  {% endif %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+          {{ govukNotificationBanner({'type': category, 'html': message}) }}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+{% endblock %}
+
+{% block footer %}
+  {{ samlandFooter({
+    'meta': {
+      'items': [
+        {
+          'href': "https://samland.minersonline.uk/",
+          'text': "Back to main Samland Government site"
+        },
+      ],
+      'html': 'Built by <a href="' + config['SERVICE_URL'] +'" class="govuk-footer__link">' + config['SERVICE_NAME'] + '</a>'
+    }
+  }) }}
+{% endblock %}
+
+{% block bodyEnd %}
+  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.10.1.min.js') }}"></script>
+  <script type="module">
+    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.10.1.min.js') }}"
+    initAll()
+  </script>
+  {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
+{% endblock %}
