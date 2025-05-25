@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.question_2') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">What is your Minecraft: Java Edition username?</h1>
+
+      <div class="govuk-form-group{% if form.minecraft_username.errors %} govuk-form-group--error{% endif %}">
+        <label class="govuk-label" for="{{ form.minecraft_username.id }}">
+          Username
+        </label>
+        <div id="username-hint" class="govuk-hint">
+          This should match your in-game name exactly.
+        </div>
+        {% if form.minecraft_username.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.minecraft_username.errors[0] }}
+          </p>
+        {% endif %}
+        {{ form.minecraft_username(class="govuk-input", id="minecraft_username", spellcheck="false", aria_describedby="username-hint") }}
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.question_3') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">Do you own the land or have permission to build on it?</h1>
+
+      <div class="govuk-form-group{% if form.land_permission.errors %} govuk-form-group--error{% endif %}">
+        {% if form.land_permission.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.land_permission.errors[0] }}
+          </p>
+        {% endif %}
+        <fieldset class="govuk-fieldset" aria-describedby="land-permission-hint">
+          <div id="land-permission-hint" class="govuk-hint">
+            You can only apply if you own the land or have written permission from the landowner.
+          </div>
+          <div class="govuk-radios">
+            {% for subfield in form.land_permission %}
+              <div class="govuk-radios__item">
+                {{ subfield(class="govuk-radios__input", id=subfield.id) }}
+                <label class="govuk-label govuk-radios__label" for="{{ subfield.id }}">
+                  {{ subfield.label.text }}
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

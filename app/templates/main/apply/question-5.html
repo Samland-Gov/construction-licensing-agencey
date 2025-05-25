@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.question_5') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">Where is the land located?</h1>
+
+      <p class="govuk-body">
+        Provide the <strong>X</strong> and <strong>Z</strong> coordinates of the location in Samland where you want to build.
+      </p>
+
+      <div class="govuk-form-group{% if form.coord_x.errors %} govuk-form-group--error{% endif %}">
+        <label class="govuk-label" for="{{ form.coord_x.id }}">
+          X coordinate
+        </label>
+        <div id="x-hint" class="govuk-hint">
+          For example: 1024
+        </div>
+        {% if form.coord_x.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.coord_x.errors[0] }}
+          </p>
+        {% endif %}
+        {{ form.coord_x(class="govuk-input", inputmode="numeric", spellcheck="false", id="coord_x", aria_describedby="x-hint") }}
+      </div>
+
+      <div class="govuk-form-group{% if form.coord_z.errors %} govuk-form-group--error{% endif %}">
+        <label class="govuk-label" for="{{ form.coord_z.id }}">
+          Z coordinate
+        </label>
+        <div id="z-hint" class="govuk-hint">
+          For example: -238
+        </div>
+        {% if form.coord_z.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.coord_z.errors[0] }}
+          </p>
+        {% endif %}
+        {{ form.coord_z(class="govuk-input", inputmode="numeric", spellcheck="false", id="coord_z", aria_describedby="z-hint") }}
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

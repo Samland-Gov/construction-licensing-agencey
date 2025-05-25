@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+
+    <h1 class="govuk-heading-xl">You’re not eligible to apply</h1>
+
+    <p class="govuk-body">
+      Based on your answers, you’re not eligible to continue with this application.
+    </p>
+
+    <p class="govuk-body">
+      If you believe this is a mistake, please <a class="govuk-link" href="{{ url_for('main.apply_index') }}">go back to the start</a> and check your answers.
+    </p>
+
+    <p class="govuk-body">
+      If you have questions or need help, contact the Construction Licensing Agency team.
+    </p>
+
+  </main>
+</div>
+{% endblock %}

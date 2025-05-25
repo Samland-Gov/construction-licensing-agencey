@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.resume') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">Do you want to resume your application?</h1>
+
+      <div class="govuk-form-group{% if form.resume.errors %} govuk-form-group--error{% endif %}">
+        {% if form.resume.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.resume.errors[0] }}
+          </p>
+        {% endif %}
+        <fieldset class="govuk-fieldset" aria-describedby="resume-hint">
+          <div id="resume-hint" class="govuk-hint">
+            We have detected that you have previously started an unfinished application.
+
+            If you select "Yes", you will continue from where you left off.
+            If you select "No", your previous application will be discarded.
+          </div>
+          <div class="govuk-radios">
+            {% for subfield in form.resume %}
+              <div class="govuk-radios__item">
+                {{ subfield(class="govuk-radios__input", id=subfield.id) }}
+                <label class="govuk-label govuk-radios__label" for="{{ subfield.id }}">
+                  {{ subfield.label.text }}
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

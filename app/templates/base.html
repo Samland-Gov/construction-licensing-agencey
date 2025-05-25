@@ -33,8 +33,11 @@
     'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index'),
     'navigation': [
-      {'href': "#", 'text': 'Components'},
-      {'href': "#", 'text': 'Forms'}
+      {'href': url_for('main.apply_index'), 'text': 'Apply'},
+      {'href': "#", 'text': 'Renew'},
+      {'href': "#", 'text': 'Status'},
+      {'href': "#", 'text': 'Guidance'},
+      {'href': "#", 'text': 'Contact'},
     ]
   }) }}
 {% endblock %}

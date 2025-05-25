@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.question_4') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">What type of construction are you planning?</h1>
+
+      <div class="govuk-form-group{% if form.construction_type.errors %} govuk-form-group--error{% endif %}">
+        {% if form.construction_type.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.construction_type.errors[0] }}
+          </p>
+        {% endif %}
+        <fieldset class="govuk-fieldset" aria-describedby="construction-type-hint">
+          <div id="construction-type-hint" class="govuk-hint">
+            Select the main category that best describes your construction project.
+          </div>
+          <div class="govuk-radios">
+            {% for subfield in form.construction_type %}
+              <div class="govuk-radios__item">
+                {{ subfield(class="govuk-radios__input", id=subfield.id) }}
+                <label class="govuk-label govuk-radios__label" for="{{ subfield.id }}">
+                  {{ subfield.label.text }}
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

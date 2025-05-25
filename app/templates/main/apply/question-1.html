@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content" role="main">
+    <form method="post" action="{{ url_for('main.question_1') }}">
+      {{ form.hidden_tag() }}
+      <h1 class="govuk-heading-xl">Do you have a Minecraft: Java Edition account?</h1>
+
+      <div class="govuk-form-group{% if form.java_account.errors %} govuk-form-group--error{% endif %}">
+        {% if form.java_account.errors %}
+          <p class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ form.java_account.errors[0] }}
+          </p>
+        {% endif %}
+        {{ form.java_account.label(class="govuk-label") }}
+        <div class="govuk-radios">
+          {% for subfield in form.java_account %}
+            <div class="govuk-radios__item">
+              {{ subfield(class="govuk-radios__input") }}
+              <label class="govuk-label govuk-radios__label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button class="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

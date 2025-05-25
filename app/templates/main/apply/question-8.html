@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <form method="post" action="{{ url_for('main.question_8') }}">
+      {{ form.hidden_tag() }}
+
+      <h1 class="govuk-heading-xl">When will the construction take place?</h1>
+
+      <div class="govuk-form-group{% if form.start_day.errors or form.start_month.errors or form.start_year.errors %} govuk-form-group--error{% endif %}">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Start date
+          </legend>
+          <div id="start-date-hint" class="govuk-hint">
+            For example, 12 6 2025
+          </div>
+          {% for error in [form.start_day.errors, form.start_month.errors, form.start_year.errors] if error %}
+            <p class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{ error[0] }}
+            </p>
+          {% endfor %}
+          <div class="govuk-date-input" id="start-date">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.start_day.id }}">
+                  Day
+                </label>
+                {{ form.start_day(class="govuk-input govuk-date-input__input govuk-input--width-2") }}
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.start_month.id }}">
+                  Month
+                </label>
+                {{ form.start_month(class="govuk-input govuk-date-input__input govuk-input--width-2") }}
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.start_year.id }}">
+                  Year
+                </label>
+                {{ form.start_year(class="govuk-input govuk-date-input__input govuk-input--width-4") }}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="govuk-form-group{% if form.end_day.errors or form.end_month.errors or form.end_year.errors %} govuk-form-group--error{% endif %}">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="end-date-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            End date
+          </legend>
+          <div id="end-date-hint" class="govuk-hint">
+            For example, 15 9 2025
+          </div>
+          {% for error in [form.end_day.errors, form.end_month.errors, form.end_year.errors] if error %}
+            <p class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{ error[0] }}
+            </p>
+          {% endfor %}
+          <div class="govuk-date-input" id="end-date">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.end_day.id }}">
+                  Day
+                </label>
+                {{ form.end_day(class="govuk-input govuk-date-input__input govuk-input--width-2") }}
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.end_month.id }}">
+                  Month
+                </label>
+                {{ form.end_month(class="govuk-input govuk-date-input__input govuk-input--width-2") }}
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="{{ form.end_year.id }}">
+                  Year
+                </label>
+                {{ form.end_year(class="govuk-input govuk-date-input__input govuk-input--width-4") }}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

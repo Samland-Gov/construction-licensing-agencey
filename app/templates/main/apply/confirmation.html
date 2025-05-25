@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block beforeContent %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" role="main">
+    <h1 class="govuk-heading-xl">Check your answers before sending your application</h1>
+
+    <dl class="govuk-summary-list">
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Do you have a Java Edition account?</dt>
+        <dd class="govuk-summary-list__value">{{ data['java_account']|capitalize }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_1') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Minecraft username</dt>
+        <dd class="govuk-summary-list__value">{{ data['minecraft_username'] }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_2') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Do you have landowner permission?</dt>
+        <dd class="govuk-summary-list__value">{{ data['land_permission']|capitalize }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_3') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Construction type</dt>
+        <dd class="govuk-summary-list__value">{{ data['construction_type'] }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_4') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location (X, Z)</dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['coord_x'] }}, {{ data['coord_z'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_5') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Social impact</dt>
+        <dd class="govuk-summary-list__value">{{ data['social_impact_description'] }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_6') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Visual description</dt>
+        <dd class="govuk-summary-list__value">{{ data['visual_description'] }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_7') }}">Change</a>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Construction dates</dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['start_date'] }} to {{ data['end_date'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="{{ url_for('main.question_8') }}">Change</a>
+        </dd>
+      </div>
+
+    </dl>
+
+    <form method="get" action="{{ url_for('main.submit_application') }}">
+      <button class="govuk-button" data-module="govuk-button">Submit application</button>
+    </form>
+
+  </main>
+</div>
+{% endblock %}
